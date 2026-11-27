@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Студенты</title>
+</head>
+<body>
+    <h1>Студенты</h1>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('students') }}">
+        <input type="text" name="name" placeholder="Имя" required>
+        <input type="number" name="grade" min="1" max="5" placeholder="Оценка" required>
+        <button type="submit">Добавить</button>
+    </form>
+
+    {% if students %}
+        <table border="1" cellpadding="4">
+            <tr><th>id</th><th>Имя</th><th>Оценка</th></tr>
+            {% for s in students %}
+                <tr><td>{{ s[0] }}</td><td>{{ s[1] }}</td><td>{{ s[2] }}</td></tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Список пуст.</p>
+    {% endif %}
+</body>
+</html>
